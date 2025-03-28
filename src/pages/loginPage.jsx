@@ -3,6 +3,7 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
 const LoginPage = () => {
   const navigate=useNavigate();
+  const [loading,setLoading]=useState(false);
   useEffect(() => {
     if (localStorage.getItem("token")) {
       navigate("/users");
@@ -24,12 +25,14 @@ const LoginPage = () => {
     }
     const handleLogin=async(e)=>{
         e.preventDefault();
+        setLoading(true);
       try {
            const res=await axios.post(`${baseUrl}api/login`,{
               email:formData.email,
               password:formData.password
            })
            if(res){
+            setLoading(false);
             if(rememberMe){
               localStorage.setItem("token",res.data.token);
             }
@@ -38,6 +41,7 @@ const LoginPage = () => {
            }
       } catch (error) {
         setError(error);
+        setLoading(false);
       }
     }
 
@@ -56,7 +60,7 @@ const LoginPage = () => {
         <input type='checkbox' value={rememberMe} onChange={(e)=>setRememberMe(e.target.checked)}/>
         <label className="text-sm font-sans mx-2" htmlFor="rememberMe">Remember me</label>
         </div>
-        <button type='submit' className='text-1xl cursor-pointer bg-blue-800 text-white p-1 my-2 rounded' >SignIn</button>
+        <button type='submit' className='text-1xl cursor-pointer bg-blue-800 text-white p-1 my-2 rounded' >{loading?"Signing in....":"SignIn"}</button>
       </form>
       </div>
       <div className="hidden sm:flex w-1/2 h-full flex-col justify-center items-center">
