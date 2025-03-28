@@ -1,8 +1,13 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
 const LoginPage = () => {
   const navigate=useNavigate();
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      navigate("/users");
+    }
+  }, [navigate]); 
     const baseUrl=import.meta.env.VITE_API_BASE_URL;
     const [rememberMe,setRememberMe]=useState(false);
     const [formData, setFormData] = useState({
@@ -27,8 +32,8 @@ const LoginPage = () => {
            if(res){
             if(rememberMe){
               localStorage.setItem("token",res.data.token);
-              localStorage.setItem("email",formData.email);
             }
+            localStorage.setItem("email",formData.email);
             navigate("/users")
            }
       } catch (error) {
@@ -51,7 +56,7 @@ const LoginPage = () => {
         <input type='checkbox' value={rememberMe} onChange={(e)=>setRememberMe(e.target.checked)}/>
         <label className="text-sm font-sans mx-2" htmlFor="rememberMe">Remember me</label>
         </div>
-        <button type='submit' className='text-1xl bg-blue-800 text-white p-1 my-2 rounded' >SignIn</button>
+        <button type='submit' className='text-1xl cursor-pointer bg-blue-800 text-white p-1 my-2 rounded' >SignIn</button>
       </form>
       </div>
       <div className="hidden sm:flex w-1/2 h-full flex-col justify-center items-center">

@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import UserCard from '../components/userCard';
-import {ArrowBigRight,ArrowBigLeft} from 'lucide-react'
+import {ArrowBigRight,ArrowBigLeft,LogOut} from 'lucide-react'
+import { useNavigate } from 'react-router-dom';
+
 const UsersPage = () => {
   const baseUrl=import.meta.env.VITE_API_BASE_URL;
   const [error,setError]=useState(null);
@@ -10,6 +12,7 @@ const UsersPage = () => {
   const [pageN,setPageN]=useState(1);
   const [totalPage,setTotalPage]=useState(1);
   const [searchTerm, setSearchTerm] = useState("");
+  const navigate=useNavigate();
   const fetchUsers=async()=>{
   try {
     setError(null);
@@ -46,12 +49,21 @@ const searchUser = (e) => {
   }
 };
 
+//logout
 
+const handleLogout=()=>{
+  localStorage.clear("token");
+  localStorage.clear("email");
+  navigate("/")
+}
 
      return (
     <div className='container mx-auto py-8 px-4'>
       <div className='ml-1 sm:ml-5 p-2 w-1xl'>
+        <div className='flex flex-row justify-between'>
      <h1 className='text-lg sm:text-5xl font-serif'>User List</h1>
+      <span onClick={handleLogout} className='cursor-pointer'><LogOut color='red'/>Logout</span>
+           </div>
      <input   
      placeholder="Search users..."
           className='border border-gray-300 w-full h-9 rounded-lg outline-none focus:ring-2 focus:ring-gray-400 my-1 p-2'

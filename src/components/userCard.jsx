@@ -17,7 +17,7 @@ const UserCard = ({userData}) => {
     <img className='w-[150px] h-[150px] rounded-full' src={userData.avatar} alt="user avatar"/>
     <span className='ml-4'>{userData.first_name} {userData.last_name}</span>
     </div>
-    {userData.email===currUser?<div className='rounded-full p-1 bg-blue-400 hover:scale-110' title='edit'>
+    {userData.email===currUser?<div className='rounded-full p-1 cursor-pointer bg-blue-400 hover:scale-110' title='edit'>
        <FilePen color='white'onClick={()=>handleEdit(userData.id)}/>
         </div>:null}
   

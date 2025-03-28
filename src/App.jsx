@@ -12,7 +12,7 @@ function App() {
           <Toaster position="top-center" reverseOrder={false} />
    <Router>
     <Routes>
-      <Route path='/login' element={<LoginPage/>}/>
+      <Route exact path='/' element={<LoginPage/>}/>
       <Route path='/users' element={<UsersPage/>}/>
       <Route path='/edituser' element={<UpdatePage/>}/>
     </Routes>
