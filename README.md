@@ -61,7 +61,7 @@ This is a React application that integrates with the Reqres API to perform basic
 ## Additional Features (Bonus Implementations)
 - **Client-side search & filtering** on the user list.
 - **React Router** for navigation between Login, User List, and Edit User pages.
-- **Hosted Version**: [Live Demo](#) (Add your deployed link here)
+- **Hosted Version**: [Live Demo](#) (https://employ-wise-mu.vercel.app/)
 
 ## Contributing
 Feel free to fork this repository and contribute. Create a pull request for any improvements!
