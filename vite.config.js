@@ -5,10 +5,4 @@ import tailwindcss from '@tailwindcss/vite'
 export default defineConfig({
   plugins: [react(),tailwindcss(),
   ],
-  server: {
-    historyApiFallback: true, // Ensures React Router works in dev
-  },
-  build: {
-    outDir: 'dist',
-  }
 })
